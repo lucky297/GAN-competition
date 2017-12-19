@@ -42,18 +42,20 @@ First, we train one cycleGAN to convert black and white comic into real RGB imag
 Second, we train the other cycleGAN to convert the current frame into the next frame.
 
 ### Collect datasets
-* For the first part, we limited the motion prediction to play basketball. 
-As the paper of cycleGAN mentions, 
-the cycleGAN trained with horses and zebras does not perform well on the images which a man ride a horse. 
-Therefore, we speculated that if the cycleGAN was trained with mixed actions, 
-the result would have been bad. In order to improve the performance, 
-we pick specific actions like playing basketball which means people are interacting with the ball in all the images. 
-Since there is no existing dataset with playing basketball, 
-we have to collected our own dataset. We collect 1500 images for both black and white comic 
-and real RGB data and trained the first cycleGAN.
+* For the first part, we limited the motion prediction to play basketball.
+
+	As the paper of cycleGAN mentions, 
+	the cycleGAN trained with horses and zebras does not perform well on the images which a man ride a horse. 
+	Therefore, we speculated that if the cycleGAN was trained with mixed actions, 
+	the result would have been bad. In order to improve the performance, 
+	we pick specific actions like playing basketball which means people are interacting with the ball in all the images. 
+	Since there is no existing dataset with playing basketball, 
+	we have to collected our own dataset. We collect 1500 images for both black and white comic 
+	and real RGB data and trained the first cycleGAN.
 
 * For the second part, from the several basketball actions, we decide to predict shooting a basketball.
-We collect 1200 images for both aiming actions and shooting actions.
+
+	We collect 1200 images for both aiming actions and shooting actions.
 
 ### Train two cycleGANs (Results)
 * For the first cycleGAN, we trained twice. 
@@ -173,5 +175,7 @@ The result is saved in ./output/cyclegan/exp_01/#new_timestamp#.
 
 ## Referemce
 [1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+
 [2] [Generating Videos with Scene Dynamics](http://carlvondrick.com/tinyvideo/paper.pdf)
+
 [3] [Dual Motion GAN for Future-Flow Embedded Video Prediction.](http://openaccess.thecvf.com/content_ICCV_2017/papers/Liang_Dual_Motion_GAN_ICCV_2017_paper.pdf)
