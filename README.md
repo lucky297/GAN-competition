@@ -25,8 +25,8 @@ can help improving the sharpness of predictions.
 
 ### System Overview
 Our project aims to predict the future frames of the black and white comic. 
-Some previous  methods using video frames and pixel flows to predict the next motion of the real image [1]. 
-The state-of-the-art techniques in Generative Adversarial Networks such as CycleGAN [2] 
+Some previous  methods using video frames and pixel flows to predict the next motion of the real image [3]. 
+The state-of-the-art techniques in Generative Adversarial Networks such as CycleGAN [1] 
 is able to learn the mapping of one image domain to another image domain using unpaired image data. 
 Therefore, we hope to use two cycleGAN architecture to achieve our goal. 
 The first cycleGAN is to generate the real RGB image from the black and white comic. 
@@ -86,10 +86,17 @@ We collect 1200 images for both aiming actions and shooting actions.
 	We then simplified some images and trained again. From the second results, we can see that cycleGAN not only catches the 
 	contours of the main targets but also learns the details. We'll keep working on it.
  
-* For the second cycleGAN, the results are pretty bad. The cycleGAN didn't learn as same as what we expected. 
-Most of the actions would be changed in the next frames. However, the cycleGAN won't change the contours of the main targets.
-What it learns is how to fill up the main targets. Therefore, we're considering to change the network. 
+* For the second cycleGAN, the results are pretty bad. 
 
+	The cycleGAN didn't learn as same as what we expected. 
+	Most of the actions would be changed in the next frames. However, the cycleGAN won't change the contours of the main targets.
+	What it learns is how to fill up the main targets. Therefore, we're considering another way to train the cycleGAN.
+
+	Since the cycleGAN seems to keep the original constructures of inputs, we decided to train the cycleGAN with optical flows. 
+	Optical flows have the similar constructures with the inputs, which might be a feasible way to train cycleGAN. 
+	We input aiming actions and try to output the optical flows. Then, we convert the optical flows into real images by 
+	traditional wrapping methods. By doing so, we believe that predicting future frames can be success.
+	
 ## Implementation
 ### Prepare datasets
 * Create the data directory for two datasets in `input/`. 
@@ -163,3 +170,8 @@ python main.py \
 	--checkpoint_dir=./output/cyclegan/exp_01/#old_timestamp# 
 ```
 The result is saved in ./output/cyclegan/exp_01/#new_timestamp#.
+
+## Referemce
+[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+[2] [Generating Videos with Scene Dynamics](http://carlvondrick.com/tinyvideo/paper.pdf)
+[3] [Dual Motion GAN for Future-Flow Embedded Video Prediction.](http://openaccess.thecvf.com/content_ICCV_2017/papers/Liang_Dual_Motion_GAN_ICCV_2017_paper.pdf)
